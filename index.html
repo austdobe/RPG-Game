@@ -14,44 +14,48 @@
     <!--Style-->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body class="container">
-    <div class = "row">
-        <h3>Player</h3>
-        <p class="card-text">
-            <span id="health"></span>
-            <span id="power"></span>
-            <span id="defense"></span>
-        </p>
-        <div class = "card player"> 
-            <div class = "col-lg-6"><span id="character"></span>
+<body>
+    <div class="scoreBoard"></div>
+    <div class="container">
+        <div class = "row">
+            <h3>Player</h3>
+            <p class="card-text">
+                <span id="health"></span>
+                <span id="power"></span>
+                <span id="defense"></span>
+            </p>
+            <div class = "card player"> 
+                <div class = "col-lg-6"><span id="character"></span>
+                </div>
+            </div>
+            <button class="btn-primary">Attack</button>
+        </div>
+        <div class = "row">
+            <h3>Enemy</h3>
+            <p class="card-text">
+                <span id="eHealth"></span>
+                <span id="ePower"></span>
+                <span id="eDefense"></span>
+            </p>
+            <div class = "card attackZone">
+                <div class = "col-lg-4"><span id="enemy"></span>
+                </div>
             </div>
         </div>
-    </div>
-    <div class = "row">
-        <h3>Enemy</h3>
-        <p class="card-text">
-            <span id="eHealth"></span>
-            <span id="ePower"></span>
-            <span id="eDefense"></span>
-        </p>
-        <div class = "card attackZone">
-            <div class = "col-lg-4"><span id="enemy"></span>
-            </div>
-        </div>
-    </div>
-    <div class = "row">
-        <div class = "characterChoice">
-            <div class = "card computer" id=" player">
-                <img cass="card-img-top" id="first" src="assets/Images/Anakin.jpg">
-            </div>
-            <div class = "card computer" id="player">
-                <img cass="card-img-top" id="third"  src="assets/Images/Luke.jpg" >
-            </div>
-            <div class = "card computer" id="player">
-                <img cass="card-img-top" id="fourth" src="assets/Images/DarthSidious.jpg">
-            </div>
-            <div class = "card computer" id="player">
-                <img cass="card-img-top" id="second" src="assets/Images/Darthmaul.jpg">
+        <div class = "row">
+            <div class = "characterChoice">
+                <div class = "card computer" id=" player">
+                    <img cass="card-img-top" id="first" src="assets/Images/Anakin.jpg">
+                </div>
+                <div class = "card computer" id="player">
+                    <img cass="card-img-top" id="third"  src="assets/Images/Luke.jpg" >
+                </div>
+                <div class = "card computer" id="player">
+                    <img cass="card-img-top" id="fourth" src="assets/Images/DarthSidious.jpg">
+                </div>
+                <div class = "card computer" id="player">
+                    <img cass="card-img-top" id="second" src="assets/Images/Darthmaul.jpg">
+                </div>
             </div>
         </div>
     </div>
