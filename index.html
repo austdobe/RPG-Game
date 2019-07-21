@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>RPG Game</title>
+    <!--Css reset-->
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--jQuery Library-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!--Style-->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="container">
+    <div class = "row">
+        <h3>Player</h3>
+        <p class="card-text">
+            <span id="health"></span>
+            <span id="power"></span>
+            <span id="defense"></span>
+        </p>
+        <div class = "card player"> 
+            <div class = "col-lg-6"><span id="character"></span>
+            </div>
+        </div>
+    </div>
+    <div class = "row">
+        <h3>Enemy</h3>
+        <p class="card-text">
+            <span id="eHealth"></span>
+            <span id="ePower"></span>
+            <span id="eDefense"></span>
+        </p>
+        <div class = "card attackZone">
+            <div class = "col-lg-4"><span id="enemy"></span>
+            </div>
+        </div>
+    </div>
+    <div class = "row">
+        <div class = "characterChoice">
+            <div class = "card computer" id=" player">
+                <img cass="card-img-top" id="first" src="assets/Images/Anakin.jpg">
+            </div>
+            <div class = "card computer" id="player">
+                <img cass="card-img-top" id="third"  src="assets/Images/Luke.jpg" >
+            </div>
+            <div class = "card computer" id="player">
+                <img cass="card-img-top" id="fourth" src="assets/Images/DarthSidious.jpg">
+            </div>
+            <div class = "card computer" id="player">
+                <img cass="card-img-top" id="second" src="assets/Images/Darthmaul.jpg">
+            </div>
+        </div>
+    </div>
+    <script rel="text/javascript" src="assets/Javascript/game.js"></script>
+    
+</body>
+</html>
