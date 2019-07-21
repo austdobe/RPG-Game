@@ -1,9 +1,11 @@
 var CharChoice = ["assets/Images/Anakin.jpg", "assets/Images/Darthmaul.jpg", "assets/Images/Luke.jpg", "assets/Images/DarthSidious.jpg", "assets/Images/yoda.jpg"];
+var chosen = new Audio("assets/Sounds/Lightsaber_Open.mp3");
+var fight = new Audio("assets/Sounds/Lightsaber_Fight.mp3");
 var wins = 0;
 var losses = 0;
 var defeat = 0;
 //Player stats
-var playerPower = 5+ Math.floor(Math.random()*11);
+var playerPower = 3+ Math.floor(Math.random()*9);
 var playerHealth = 100;
 var playerDefense = 6;
 //Enemy Stats
@@ -17,8 +19,12 @@ var anakinChosen = false;
 var lukeChosen = false;
 var maulChosen = false;
 var sidiousChosen=false;
-console.log(playerChosen)
+var yodaChosen=true;
 //Choose player and enemy
+
+$( "document" ).ready(function(){
+    $("#fifth").hide()
+
 $("#first").on("click", function() {
 
     if (playerChosen && !enemyChosen) {
@@ -28,6 +34,7 @@ $("#first").on("click", function() {
         hideChosen()
         calculateEnemy()
         showEnemyStats()
+        chosen.play()
     }
     else if(!playerChosen) {
         $(".player").html("<img src="+CharChoice[0]+">");
@@ -35,6 +42,7 @@ $("#first").on("click", function() {
         anakinChosen=true;
         hideChosen()
         showPlayerStats()
+        chosen.play()
     }
     
 })
@@ -47,6 +55,7 @@ $("#second").on("click", function() {
         hideChosen()
         calculateEnemy()
         showEnemyStats()
+        chosen.play()
     }
     else if(!playerChosen){
         $(".player").html("<img src="+CharChoice[1]+">");
@@ -54,6 +63,7 @@ $("#second").on("click", function() {
         maulChosen = true;
         hideChosen()
         showPlayerStats()
+        chosen.play()
         
     } 
 })
@@ -66,6 +76,7 @@ $("#third").on("click", function() {
         hideChosen()
         calculateEnemy()
         showEnemyStats()
+        chosen.play()
     }
     else if(!playerChosen){
         $(".player").html("<img src="+CharChoice[2]+">");
@@ -73,6 +84,7 @@ $("#third").on("click", function() {
         lukeChosen = true;
         hideChosen()
         showPlayerStats()
+        chosen.play()
     }
 })
 $("#fourth").on("click", function() {
@@ -84,6 +96,7 @@ $("#fourth").on("click", function() {
         hideChosen()
         calculateEnemy()
         showEnemyStats()
+        chosen.play()
     }
     else if(!playerChosen){
         $(".player").html("<img src="+CharChoice[3]+">");
@@ -91,9 +104,24 @@ $("#fourth").on("click", function() {
         sidiousChosen = true;
         hideChosen()
         showPlayerStats()
+        chosen.play()
     }
-
 })
+$("#fifth").on("click", function() {
+
+    if (playerChosen && !enemyChosen) {
+        $(".attackZone").html("<img src="+CharChoice[4]+">");
+        yodaChosen = true;
+        enemyChosen = true;
+        hideChosen()
+        calculateEnemy()
+        showEnemyStats()
+        chosen.play()
+        showPlayerStats()
+    }
+})
+
+
 function hideChosen(){
     if(sidiousChosen){
         $("#fourth").fadeOut();
@@ -106,6 +134,9 @@ function hideChosen(){
     }
     if(lukeChosen){
         $("#third").fadeOut()
+    }
+    if(yodaChosen){
+        $("#fifth").fadeOut()
     }
 }
 function showPlayerStats(){
@@ -129,19 +160,34 @@ function calculateEnemy(){
         enemyDefense = 3;
         enemyPower = 8;
     }
-    if(defeat>=1){
-        enemyHealth=100;
+    if(defeat===1){
+        enemyHealth=150;
         enemyDefense = 16;
-        enemyPower = 20;
+        enemyPower = 16;
+    }
+    if(defeat>=2){
+        enemyHealth = 200;
+        enemyDefense = 20;
+        enemyPower = 25;
+    }
+    if(defeat ===3){
+        enemyHealth=300;
+        enemyDefense=30;
+        enemyPower=40;
+        yodaChosen = false;
+        $("#fifth").show();
     }
 };
 
 //display and add to player stats on each attack
-$("button").on("click", function(){
+$("#attack").on("click", function(){
     if(enemyChosen){
         var damage = playerPower - enemyDefense;
         enemyHealth = enemyHealth - damage;
         playerPower = playerPower+3;
+        if(playerDefense>enemyPower){
+            playerHealth--;
+        }else if(playerDefense<enemyPower)
         playerHealth = playerHealth - enemyPower + playerDefense;
         if(defeat>=1){
             playerDefense++;
@@ -150,11 +196,36 @@ $("button").on("click", function(){
         showEnemyStats()
         isdefeated()
         playerStatus()
+        fight.play()
     }else{
-        alert("Please choose an enemy.")
+        if(playerChosen){
+            alert("Please choose an enemy.")
+        }else{
+            alert("Please choose your player")
+        }
     }
-
-})
+});
+$("#boost").on("click", function(){
+    if(enemyChosen){
+        playerPower++;
+        if(playerDefense>enemyPower){
+            playerHealth--;
+        }else if(playerDefense<enemyPower)
+        playerHealth = playerHealth - enemyPower + playerDefense;
+        playerDefense++;
+        showPlayerStats()
+        showEnemyStats()
+        isdefeated()
+        playerStatus()
+        fight.play()
+    }else{
+        if(playerChosen){
+            alert("Please choose an enemy.")
+        }else{
+            alert("Please choose your player")
+        }
+    }
+});
 //determine defeat
 function isdefeated(){
     if(enemyHealth<=0){
@@ -165,44 +236,51 @@ function isdefeated(){
         $("#eDefense").html(" ")
         enemyChosen = false;
         calculateEnemy();
+        
     }
-    if(defeat ===3){
-        alert("You Win")
+    if(defeat > 3){
+        alert("You win!")
+        gameReset();
     }
 }
 function playerStatus(){
     if(playerHealth<=0&&enemyHealth>0){
-        if(sidiousChosen){
-            $("#fourth").show();
-        }
-        if(maulChosen){
-            $("#second").show();
-        }
-        if(anakinChosen){
-            $("#first").show();
-        }
-        if(lukeChosen){
-            $("#third").show()
-        }
-        sidiousChosen = false;
-        maulChosen = false;
-        anakinChosen = false;
-        lukeChosen = false;
-        playerChosen = false; 
-        enemyChosen = false;
-        defeat = 0;
-        playerHealth = 100;
-        playerPower =8;
-        playerDefense=6;
-        $(".attackZone").text(" ");
-        $("#eHealth").html(" ")
-        $("#ePower").html(" ")
-        $("#eDefense").html(" ")
-        $(".player").html(" ")
-        $("#health").html(" ")
-        $("#power").html(" ")
-        $("#defense").html(" ")
+        alert("You lost")
+        gameReset();
+        
     }
-
 };
+function gameReset(){
+    if(sidiousChosen){
+        $("#fourth").show();
+    }
+    if(maulChosen){
+        $("#second").show();
+    }
+    if(anakinChosen){
+        $("#first").show();
+    }
+    if(lukeChosen){
+        $("#third").show()
+    }
+    sidiousChosen = false;
+    maulChosen = false;
+    anakinChosen = false;
+    lukeChosen = false;
+    playerChosen = false; 
+    enemyChosen = false;
+    defeat = 0;
+    playerHealth = 100;
+    playerPower =8;
+    playerDefense=6;
+    $(".attackZone").text(" ");
+    $("#eHealth").html(" ")
+    $("#ePower").html(" ")
+    $("#eDefense").html(" ")
+    $(".player").html(" ")
+    $("#health").html(" ")
+    $("#power").html(" ")
+    $("#defense").html(" ")
+}
+});
 
