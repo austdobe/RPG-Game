@@ -1,6 +1,7 @@
 var CharChoice = ["assets/Images/Anakin.jpg", "assets/Images/Darthmaul.jpg", "assets/Images/Luke.jpg", "assets/Images/DarthSidious.jpg", "assets/Images/yoda.jpg"];
 var chosen = new Audio("assets/Sounds/Lightsaber_Open.mp3");
 var fight = new Audio("assets/Sounds/Lightsaber_Fight.mp3");
+var powerUp = new Audio("assets/Sounds/powerUp.mp3")
 var wins = 0;
 var losses = 0;
 var defeat = 0;
@@ -217,7 +218,7 @@ $("#boost").on("click", function(){
         showEnemyStats()
         isdefeated()
         playerStatus()
-        fight.play()
+        powerUp.play()
     }else{
         if(playerChosen){
             alert("Please choose an enemy.")
