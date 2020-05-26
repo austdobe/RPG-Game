@@ -268,6 +268,7 @@ function gameReset(){
     maulChosen = false;
     anakinChosen = false;
     lukeChosen = false;
+    yodaChosen = true;
     playerChosen = false; 
     enemyChosen = false;
     defeat = 0;
